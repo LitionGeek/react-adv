@@ -1,5 +1,7 @@
 import { lazy, LazyExoticComponent } from "react";
 import { LazyPages,LazyPages2,LazyPages3 } from "../lazyload/pages";
+import { NoLazy } from '../lazyload/pages/NoLazy';
+
 
 type JSXComponent = ()=>JSX.Element
 
@@ -10,28 +12,22 @@ interface Route{
     name:string;
 }
 
-const Lazy1 = lazy(()=> import(/*webpackChunkName:"LazyPages1"*/'../lazyload/pages/LazyPages'));
+const LazyLayout = lazy(()=> import(/*webpackChunkName:"LazyPages1"*/'../lazyload/layout/LazyLayout'));
 const Lazy2 = lazy(()=> import(/*webpackChunkName:"LazyPages2"*/'../lazyload/pages/LazyPages2'));
 const Lazy3 = lazy(()=> import(/*webpackChunkName:"LazyPages3"*/'../lazyload/pages/LazyPages3'));
 
 export const routes:Route[] = [
     {
-        to:'/lazy1',
-        path:'lazy1',
-        Component:Lazy1,
-        name:'Lazy-1'
+        to:'/lazyload',
+        path:'/lazyload/*',
+        Component:LazyLayout,
+        name:'LazyLayout'
     },
     {
-        to:'/lazy2',
-        path:'lazy2',
-        Component:Lazy2,
-        name:'Lazy-2'
-    },    
-    {
-        to:'/lazy3',
-        path:'lazy3',
-        Component:Lazy3,
-        name:'Lazy-3'
+        to:'/no-lazy',
+        path:'no-lazy',
+        Component:NoLazy,
+        name:'no-lazy'
     }
 ]
 
